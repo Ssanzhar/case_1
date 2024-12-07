@@ -1,33 +1,98 @@
-import * as React from "react";
+import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import {
   Card,
   CardActions,
   CardContent,
-  Button,
+  CardHeader,
+  Collapse,
+  IconButton,
   Typography,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-export default function Item({ id, title, descr, date, src }) {
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme }) => ({
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+  variants: [
+    {
+      props: ({ expand }) => !expand,
+      style: {
+        transform: "rotate(0deg)",
+      },
+    },
+    {
+      props: ({ expand }) => !!expand,
+      style: {
+        transform: "rotate(180deg)",
+      },
+    },
+  ],
+}));
+
+export default function List({ title, id, date, description, link }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card
+      sx={{
+        width: 600,
+        marginTop: 3,
+        marginBottom: 3,
+        backgroundColor: "#181818",
+        color: "#FFFFFF",
+        borderRadius: 5,
+        border: "solid",
+        borderColor: "#242424",
+      }}
+    >
+      <CardHeader
+        sx={{ color: "#FFFFFF" }}
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon sx={{ color: "#FFFFFF" }} />
+          </IconButton>
+        }
+        title={`ID: ${id}`}
+      />
       <CardContent>
-        <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
-          Id: {id}
+        <Typography variant="body2" sx={{ color: "white" }}>
           Title: {title}
         </Typography>
-        <Typography variant="h5" component="div"></Typography>
-        <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-          adjective
+        <Typography variant="body2" sx={{ color: "white" }}>
+          Link: {link}
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography variant="body2" sx={{ color: "white" }}>
+          Date: {date}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
+      <CardActions disableSpacing>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+          sx={{ color: "#FFFFFF" }}
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
       </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography sx={{ marginBottom: 2 }}>Description:</Typography>
+          <Typography sx={{ marginBottom: 2 }}>{description}</Typography>
+        </CardContent>
+      </Collapse>
     </Card>
   );
 }

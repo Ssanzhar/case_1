@@ -6,7 +6,7 @@ export default function List() {
       name: "1",
       title: "esgafharh",
       date: "01/01424051/34634/602",
-      src: "phub.com",
+      link: "phub.com",
       descr: "huynya ebanaya",
       id: "007",
     },
@@ -14,7 +14,7 @@ export default function List() {
       name: "2",
       title: "sdgarhaerh",
       date: "01/01424051/34634/602",
-      src: "phub.com",
+      link: "phub.com",
       descr: "huynya ebanaya",
       id: "007",
     },
@@ -22,7 +22,7 @@ export default function List() {
       name: "3",
       title: "qwegqweg",
       date: "01/01424051/34634/602",
-      src: "phub.com",
+      link: "phub.com",
       descr: "huynya ebanaya",
       id: "007",
     },
@@ -32,9 +32,9 @@ export default function List() {
       {list.map((el) => (
         <Item
           date={el.date}
-          src={el.src}
-          name={el.name}
-          descr={el.descr}
+          link={el.link}
+          title={el.title}
+          description={el.descr}
           id={el.id}
         />
       ))}
