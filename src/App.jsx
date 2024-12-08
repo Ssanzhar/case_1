@@ -1,6 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import Home from "./Routes/Home";
 import List from "./Routes/List";
+import Input from "./components/Input/Input";
 
 function App() {
   const routes = useRoutes([
@@ -11,6 +12,10 @@ function App() {
     {
       path: "/list",
       element: <List />,
+    },
+    {
+      path: "/email",
+      element: <Input />,
     },
   ]);
 

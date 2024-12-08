@@ -1,8 +1,10 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Input() {
   const [inputValue, setInputValue] = useState("Enter your email here:");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -16,6 +18,9 @@ export default function Input() {
       email: inputValue,
     });
     setInputValue("Enter your email here:");
+
+    // if (response.ok) navigate("/list");
+    navigate("/list");
   };
 
   return (
@@ -25,7 +30,7 @@ export default function Input() {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        width: "100vh",
+        width: "100%",
         backgroundColor: "#E1E1E2",
       }}
     >

@@ -7,7 +7,7 @@ export default function List() {
   const getData = async () => {
     const response = await fetch(
       "http://127.0.0.1:5000/api/v1/vulnerabilities"
-    ); // Make sure to use the full URL with http://
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
